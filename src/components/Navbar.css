@@ -1,33 +1,44 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8f8f8;
-  }
-  
-  .navbar-logo img {
-    height: 70px;
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navbar-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .navbar-links a:hover {
-    color: #007bff;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+}
 
-  .login {
-    padding: 5px; 
-    border: 1px solid;
-    border:none;
+.navbar-logo img {
+  height: 70px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.navbar-links a:hover {
+  color: #007bff;
+}
+
+.login {
+  padding: 5px; 
+  border: 1px solid;
+  border:none;
+  border-radius: 30px;
+  background: rgb(183, 180, 180);
+}
+/* ✅ 로그아웃 버튼 스타일 */
+.logout {
+    width: 5px; /* 버튼을 정사각형으로 만들기 위한 너비 */
+    border: none;
     border-radius: 30px;
-    background: rgb(183, 180, 180);
-  }
+    background: #ff4d4f; /* ✅ 로그아웃은 빨간색 */
+    min-width: 80px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+}
