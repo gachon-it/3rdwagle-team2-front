@@ -1,9 +1,15 @@
 import React from 'react';
+import './MyPage.css';
+import MyPageSetInfo from './MyPageComponent/MyPageSetInfo';
+import MyPageProfile from './MyPageComponent/MyPageProfile';
 
-const Mypage = () => {
-    return(
-        <div> </div>
-    );
+const MyPage = () => {
+  return (
+    <div>
+      <MyPageProfile />
+      <MyPageSetInfo />
+    </div>
+  );
 };
 
-export default Mypage;
+export default MyPage;
