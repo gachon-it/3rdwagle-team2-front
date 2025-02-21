@@ -24,21 +24,22 @@
   color: #007bff;
 }
 
-.login {
-  padding: 5px; 
-  border: 1px solid;
-  border:none;
-  border-radius: 30px;
-  background: rgb(183, 180, 180);
-}
-/* ✅ 로그아웃 버튼 스타일 */
-.logout {
-    width: 5px; /* 버튼을 정사각형으로 만들기 위한 너비 */
-    border: none;
+  .login {
+    padding: 5px; 
+    border: 1px solid;
+    border:none;
     border-radius: 30px;
-    background: #ff4d4f; /* ✅ 로그아웃은 빨간색 */
-    min-width: 80px;
-    color: white;
-    font-size: 13px;
-    cursor: pointer;
-}
+    background: rgb(183, 180, 180);
+  }
+  /* ✅ 로그아웃 버튼 스타일 */
+  .logout {
+      width: 5px; /* 버튼을 정사각형으로 만들기 위한 너비 */
+      border: none;
+      border-radius: 30px;
+      background: #ff4d4f; /* ✅ 로그아웃은 빨간색 */
+      min-width: 80px;
+      color: white;
+      font-size: 13px;
+      cursor: pointer;
+  }
+  

@@ -16,20 +16,23 @@ const Stuffs = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/groupbuy`, {
-                    withCredentials: true, // CORS 문제 방지 (필요한 경우)
+                    withCredentials: true, // CORS 문제 방지
                 });
 
                 if (Array.isArray(response.data)) {
                     setItems(
                         response.data.map(groupBuy => ({
-                            id: groupBuy.groupBuyId, // ✅ 고유 ID 사용
+                            id: groupBuy.groupBuyId,
                             title: groupBuy.title,
-                            content:groupBuy.content,
+                            content: groupBuy.content,
                             price: groupBuy.price_per_person,
                             people: groupBuy.max_people,
-                            date: new Date(groupBuy.created_at).toLocaleDateString(), // 날짜 변환
+                            date: new Date(groupBuy.created_at).toLocaleDateString(),
                             location: groupBuy.location || "위치 미정",
-                            status: groupBuy.status // 모집 중 / 종료
+                            status: groupBuy.status,
+                            imageUrl: groupBuy.image_url ? groupBuy.image_url : sampleImage
+                            // 기본 이미지
+                        
                         }))
                     );
                 } else {
@@ -47,7 +50,7 @@ const Stuffs = () => {
     }, []);
 
     const handleMoreClick = (id) => {
-        navigate(`/group-buy/detail/${id}`); // ✅ 상세 페이지 이동 시 ID 포함
+        navigate(`/group-buy/detail/${id}`);
     };
 
     if (loading) {
@@ -71,7 +74,24 @@ const Stuffs = () => {
                                     </Typography>
                                 </CardContent>
 
-                                <CardMedia component="img" height="140" image={sampleImage} alt={`${item.title} 이미지`} />
+                                <CardMedia 
+    component="img"
+    sx={{
+        height: 180, // 카드 안에서 이미지 높이 설정
+        width: "100%", // 카드의 가로폭에 맞춤
+        objectFit: "contain", // 📌 이미지가 잘리지 않고 전체가 보이도록 설정
+        borderRadius: "5px", // (선택) 이미지 둥글게
+        backgroundColor: "#f8f8f8" // (선택) 이미지 비율이 맞지 않을 때 빈 공간 배경색 설정
+    }}
+    image={item.imageUrl} 
+    alt={`${item.title} 이미지`} 
+    onError={(e) => {
+        console.error("❌ 이미지 로드 실패:", e.target.src);
+        e.target.src = sampleImage; // 기본 이미지로 대체
+    }}
+/>
+
+
 
                                 <CardContent sx={{ px: 2 }}>
                                     <Box display="flex" justifyContent="space-between">
@@ -104,7 +124,7 @@ const Stuffs = () => {
                                             backgroundColor: "#D4AF37",
                                             "&:hover": { backgroundColor: "#B58E28" },
                                         }}
-                                        onClick={() => handleMoreClick(item.id)} // ✅ 상세 보기 시 ID 전달
+                                        onClick={() => handleMoreClick(item.id)}
                                     >
                                         더보기
                                     </Button>
@@ -119,4 +139,3 @@ const Stuffs = () => {
 };
 
 export default Stuffs;
-
