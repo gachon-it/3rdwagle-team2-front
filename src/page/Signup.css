@@ -1,0 +1,70 @@
+.container {
+    color: black;
+    width: 400px;
+    margin: 170px auto;
+    padding: 20px 30px 70px 30px;
+    border: 2px solid;
+    text-align: center;
+    border: none;
+    border-radius: 50px;
+    background: #f5e6cc;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    text-align: left;
+    padding: 5px 0;
+}
+
+td:first-child {
+    width: 30%;
+}
+
+input {
+    background-color: white;  /* 배경색을 흰색으로 변경 */
+    margin-top: 10px;
+    box-sizing: border-box;
+    padding: 0.6rem;
+    width: 100%;  /* 너비를 100%로 변경하여 td 내에서 꽉 차게 함 */
+    border: 1px solid rgb(162, 116, 76);
+    border-radius: 10px;
+}
+
+#emailId {
+    flex: 1;
+    margin-right: 5px;
+}
+
+#emailDomain {
+    flex: 1;
+    background-color: white;
+    padding: 0.6rem;
+    border: 1px solid rgb(162, 116, 76);
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+#emailId + span {
+    margin: 0 5px;
+}
+
+.signbutton {
+    display: block;
+    margin: 30px auto 0;
+    width: 50%;
+    padding: 10px;
+    background-color: #a2744c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.email-input {
+    display: flex;
+    align-items: center;
+    height: 20px;
+}
