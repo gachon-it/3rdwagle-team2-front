@@ -11,18 +11,15 @@ const DetailPageTitle = ({ price, people, date, location }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                minHeight: "100vh",
+                minHeight: "45vh",
             }}
         >
             <Card
                 sx={{
-                    border: "1px solid #D4AF37",
-                    borderRadius: "16px",
                     maxWidth: 1100, // 가로 길이 확장
                     width: "70%", // 화면 크기에 맞춰 유동적 조정
                     height:180,
                     p: 3,
-                    boxShadow: 3,
                 }}
             >
                 {/* 제목 */}
