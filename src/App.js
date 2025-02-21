@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/group-buy/create" element={<MakeGroupBuyPage />} />
         <Route path="/group-buy" element={<GroupBuyPage />} />
-        <Route path="/group-buy/detail" element={<GroupBuyDetailPage />} />
+        <Route path="/group-buy/detail/:id" element={<GroupBuyDetailPage />} />
         <Route path="/delivery" element={<DeliveryPage />} />
         <Route path="/benefits" element={<BenefitsPage />} />
         <Route path="/mypage" element={<MyPage />} />

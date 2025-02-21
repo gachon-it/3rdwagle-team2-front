@@ -1,9 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 
-import sampleImage from "../assets/sample.png";
-
-const DetailPageContent = ({ description }) => {
+const DetailPageContent = ({ description, imageUrl }) => {
     return (
         <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
             <Card
@@ -29,8 +27,8 @@ const DetailPageContent = ({ description }) => {
                 <Box display="flex" justifyContent="center">
                     <Box
                         component="img"
-                        src={sampleImage}
-                        alt="책 이미지"
+                        src={imageUrl} // DB에서 가져온 이미지 URL을 사용
+                        alt="상품 이미지"
                         sx={{
                             width: 250,
                             height: "auto",
@@ -61,4 +59,3 @@ const DetailPageContent = ({ description }) => {
 };
 
 export default DetailPageContent;
-

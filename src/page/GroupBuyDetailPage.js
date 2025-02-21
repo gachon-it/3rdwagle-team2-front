@@ -1,25 +1,73 @@
-import React from 'react';
-import { Container, Box, Button } from '@mui/material';
-import DetailPageTitle from '../components/DetailPageTitle';
-import DetailPageContent from "../components/DetailPageContent";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom"; 
+import axios from "axios";
+import { Container, Box, Button, Typography } from "@mui/material";
+import sampleImage from "../assets/sample.png"; // 기본 이미지
 import Footer from "../components/Footer";
+import DetailPageTitle from "../components/DetailPageTitle";
+import DetailPageContent from "../components/DetailPageContent";
+
+const API_BASE_URL = "http://localhost:3000"; // 백엔드 서버
 
 const GroupBuyDetailPage = () => {
-    const detailData = {
-        price: 23000,
-        people: "6/7명",
-        date: "2025.02.28",
-        location: "가천대 제3기숙사",
-        description: "미분적분학 책 공유해요. 이 책은 공과대학 1학년 필수교재로 예제/유제 시험문제로 나옵니다.",
-    };
+    const { id } = useParams(); // URL 파라미터에서 id 추출
+    const navigate = useNavigate();
+    const [item, setItem] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchItemDetail = async () => {
+            try {
+                const response = await axios.get(`${API_BASE_URL}/groupbuy/${id}`, {
+                    withCredentials: true, // CORS 문제 방지
+                });
+
+                if (response.data) {
+                    const groupBuyDetail = response.data;
+                    setItem({
+                        title: groupBuyDetail.title,
+                        content: groupBuyDetail.content,
+                        price: groupBuyDetail.price_per_person,
+                        people: groupBuyDetail.max_people,
+                        date: new Date(groupBuyDetail.created_at).toLocaleDateString(),
+                        location: groupBuyDetail.location || "위치 미정",
+                        status: groupBuyDetail.status,
+                        imageUrl: groupBuyDetail.image_url ? groupBuyDetail.image_url : sampleImage, // DB에서 이미지 URL을 가져옴
+                    });
+                } else {
+                    throw new Error("Invalid data format");
+                }
+            } catch (error) {
+                console.error("Error fetching item detail:", error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchItemDetail();
+    }, [id]);
 
     const handleJoinClick = () => {
         alert("참여 신청이 완료되었습니다!");
     };
 
     const handleBackClick = () => {
-        window.history.back();
+        navigate("/group-buy");  // 목록 페이지로 돌아가기
     };
+
+    if (loading) {
+        return <Typography>Loading...</Typography>;
+    }
+
+    if (error) {
+        return <Typography color="error">Error: {error}</Typography>;
+    }
+
+    if (!item) {
+        return <Typography color="error">Item not found</Typography>;
+    }
 
     return (
         <Container
@@ -33,8 +81,8 @@ const GroupBuyDetailPage = () => {
                 maxWidth: "1100px", // 콘텐츠 정렬 유지
             }}
         >
-            <DetailPageTitle {...detailData} />
-            <DetailPageContent description={detailData.description} />
+            <DetailPageTitle title={item.title} price={item.price} people={item.people} date={item.date} location={item.location} />
+            <DetailPageContent description={item.content} imageUrl={item.imageUrl} /> {/* 이미지 URL 전달 */}
 
             {/* 버튼 컨테이너 */}
             <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>
@@ -77,7 +125,7 @@ const GroupBuyDetailPage = () => {
                 </Button>
             </Box>
 
-            {/* Footer의 너비를 100%로 유지 */}
+            {/* Footer */}
             <Box sx={{ width: "100%", mt: 5 }}>
                 <Footer />
             </Box>
@@ -86,5 +134,3 @@ const GroupBuyDetailPage = () => {
 };
 
 export default GroupBuyDetailPage;
-
-
